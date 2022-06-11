@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import s from './SearchForm.module.css';
 import { toast } from 'react-toastify';
-import PropTypes from 'prop-types';
 import IconButton from 'components/IconButton';
 import { ReactComponent as SearchIcon } from '../../Icons/search.svg';
 
