@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './LoadMore.module.css';
+import PropTypes from 'prop-types';
 
 const LoadMore = ({ onClick }) => (
   <button type="button" onClick={onClick} className={s.Button}>
@@ -8,3 +9,5 @@ const LoadMore = ({ onClick }) => (
 );
 
 export default LoadMore;
+
+LoadMore.propTypes = { onClick: PropTypes.func.isRequired };

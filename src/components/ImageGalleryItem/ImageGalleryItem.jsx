@@ -9,3 +9,10 @@ const ImageGalleryItem = ({ id, webformatURL, tags, onItemClick }) => (
 );
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+};

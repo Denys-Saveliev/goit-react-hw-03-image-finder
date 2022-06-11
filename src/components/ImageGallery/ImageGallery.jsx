@@ -20,3 +20,14 @@ const ImageGallery = ({ imageGalleryItems, onGalleryItemClick }) => {
 };
 
 export default ImageGallery;
+
+ImageGallery.propTypes = {
+  imageGalleryItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ),
+  onGalleryItemClick: PropTypes.func.isRequired,
+};
