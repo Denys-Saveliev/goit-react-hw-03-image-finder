@@ -1,10 +1,14 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import { fetchImage, PER_PAGE } from '../../Service/PixabayApi';
+import Searchbar from '../Searchbar';
+import SearchForm from '../SearchForm';
 import ImageGallery from '../ImageGallery';
 import Loader from 'components/Loader';
 import LoadMore from 'components/LoadMore';
 import Modal from '../Modal';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Status = {
   IDLE: 'idle',
@@ -15,6 +19,7 @@ const Status = {
 
 class ImageInfo extends Component {
   state = {
+    search: '',
     galleryItems: [],
     page: 1,
     status: Status.IDLE,
@@ -24,8 +29,8 @@ class ImageInfo extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const prevName = prevProps.searchQuery;
-    const nextName = this.props.searchQuery;
+    const prevName = prevState.search;
+    const nextName = this.state.search;
     const nextPage = prevState.page !== this.state.page;
     const newRequest = nextName !== prevName;
 
@@ -76,6 +81,10 @@ class ImageInfo extends Component {
     }
   }
 
+  handleFormSubmit = search => {
+    this.setState({ search, page: 1 });
+  };
+
   incrementPage = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
@@ -100,6 +109,10 @@ class ImageInfo extends Component {
 
     return (
       <>
+        <Searchbar>
+          <SearchForm onSubmit={this.handleFormSubmit} />
+        </Searchbar>
+
         {status === Status.IDLE && (
           <h2 style={{ textAlign: 'center' }}>
             Please enter your query in the search query
@@ -128,6 +141,8 @@ class ImageInfo extends Component {
         )}
 
         {status === Status.PENDING && <Loader />}
+
+        <ToastContainer style={{ justifyContent: 'center' }} />
       </>
     );
   }
